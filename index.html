@@ -92,7 +92,8 @@
                         thankYouMessage.style.display = 'block';
 
                         // 4. Build the final affiliate URL with the tracking ID
-                        const finalRedirectURL = AFFILIATE_URL + '&tid=' + (promoterId || 'direct');
+                        // This is the NEW, correct line
+                        const finalRedirectURL = AFFILIATE_URL + '?tid=' + (promoterId || 'direct');
 
                         // 5. Wait 2 seconds, then redirect the user
                         setTimeout(() => {
