@@ -28,7 +28,7 @@
 <body>
 
     <div
-        style="max-width: 500px; margin: 80px auto; background:rgba(34,34,34,0.9); padding:30px; border-radius:6px; text-align:center; color:white;">
+        style="max-width: 500px; margin: 80px auto; background:rgba(34, 34, 34, 0.9); padding:30px; border-radius:6px; text-align:center; color:white;">
 
         <h2 style="color:white; font-size:22px; line-height:1.5;">
             "FACT: Below You'll Find The Secret To The<span style="color:red;"> New 'MITO-MELT' </span>Method..."
@@ -59,13 +59,19 @@
     </footer>
 
     <script>
+        // --- CONFIGURATION ---
+        const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbzKlMxjW78iq65zW6kK79pjBdwK2vkr2QwOaUjTxYMcb46Ub3TR9_s-5ub0lnZcGgL2_Q/exec';
+
+        const AFFILIATE_URL = 'https://adc1a2wft7ukyk69rmp73l5nfv.hop.clickbank.net/?hop=fitshlok';
+
+        // --- APPLICATION CODE ---
         const form = document.getElementById('lead-form');
         const submitButton = document.getElementById('submit-button');
         const thankYouMessage = document.getElementById('thankYouMessage');
 
-        const scriptURL = 'https://script.google.com/macros/s/AKfycbzKlMxjW78iq65zW6kK79pjBdwK2vkr2QwOaUjTxYMcb46Ub3TR9_s-5ub0lnZcGgL2_Q/exec';
-
-        const affiliateURL = 'https://adc1a2wft7ukyk69rmp73l5nfv.hop.clickbank.net/?&traffic_source=reddit&traffic_type=organic&campaign=fitness_thread';
+        // 1. Get the promoter's ID from the page URL
+        const urlParams = new URLSearchParams(window.location.search);
+        const promoterId = urlParams.get('ref'); // Looks for "?ref=PROMOTER_ID"
 
         form.addEventListener('submit', e => {
             e.preventDefault();
@@ -73,15 +79,29 @@
             submitButton.disabled = true;
             submitButton.innerText = 'SUBMITTING...';
 
-            fetch(scriptURL, { method: 'POST', body: new FormData(form) })
-                .then(response => {
-                    console.log('Success!', response);
-                    submitButton.innerText = 'SUCCESS!';
-                    thankYouMessage.style.display = 'block';
+            // 2. Create the data payload to send to Google Sheets
+            const formData = new FormData(form);
+            formData.append('promoter', promoterId); // Add the promoter ID to the form data
 
-                    setTimeout(() => {
-                        window.location.href = affiliateURL;
-                    }, 2000);
+            // 3. Send the data to your Google Apps Script
+            fetch(SCRIPT_URL, { method: 'POST', body: formData })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.result === 'success') {
+                        console.log('Success!');
+                        submitButton.innerText = 'SUCCESS!';
+                        thankYouMessage.style.display = 'block';
+
+                        // 4. Build the final affiliate URL with the tracking ID
+                        const finalRedirectURL = AFFILIATE_URL + '&tid=' + (promoterId || 'direct');
+
+                        // 5. Wait 2 seconds, then redirect the user
+                        setTimeout(() => {
+                            window.location.href = finalRedirectURL;
+                        }, 2000);
+                    } else {
+                        throw new Error('Submission failed');
+                    }
                 })
                 .catch(error => {
                     console.error('Error!', error.message);
