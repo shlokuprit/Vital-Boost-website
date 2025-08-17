@@ -16,10 +16,8 @@
             background-attachment: fixed;
         }
 
-        /* Style for the thank you message */
         #thankYouMessage {
             display: none;
-            /* Hidden by default */
             color: #ffcc00;
             margin-top: 15px;
             font-weight: bold;
@@ -30,10 +28,10 @@
 <body>
 
     <div
-        style="max-width: 500px; margin: 80px auto; background:rgba(34, 34, 34, 0.9); padding:30px; border-radius:6px; text-align:center; color:white;">
+        style="max-width: 500px; margin: 80px auto; background:rgba(34,34,34,0.9); padding:30px; border-radius:6px; text-align:center; color:white;">
 
         <h2 style="color:white; font-size:22px; line-height:1.5;">
-            The 30-Second Morning Ritual That Flushes Out a Hidden ‘Metabolic Blocker’ From Your System
+            "FACT: Below You'll Find The Secret To The<span style="color:red;"> New 'MITO-MELT' </span>Method..."
         </h2>
 
         <p style="color:#bbb; margin:20px 0 10px;">Enter Your Email to Discover The Secret:</p>
@@ -65,15 +63,12 @@
         const submitButton = document.getElementById('submit-button');
         const thankYouMessage = document.getElementById('thankYouMessage');
 
-        // !!! IMPORTANT !!! 
-        // PASTE YOUR GOOGLE APPS SCRIPT URL HERE
         const scriptURL = 'https://script.google.com/macros/s/AKfycbzKlMxjW78iq65zW6kK79pjBdwK2vkr2QwOaUjTxYMcb46Ub3TR9_s-5ub0lnZcGgL2_Q/exec';
 
-        // This is your affiliate link
         const affiliateURL = 'https://adc1a2wft7ukyk69rmp73l5nfv.hop.clickbank.net/?&traffic_source=reddit&traffic_type=organic&campaign=fitness_thread';
 
         form.addEventListener('submit', e => {
-            e.preventDefault(); // This stops the form from submitting the old way
+            e.preventDefault();
 
             submitButton.disabled = true;
             submitButton.innerText = 'SUBMITTING...';
@@ -84,7 +79,6 @@
                     submitButton.innerText = 'SUCCESS!';
                     thankYouMessage.style.display = 'block';
 
-                    // Wait 2 seconds, then redirect to the affiliate link
                     setTimeout(() => {
                         window.location.href = affiliateURL;
                     }, 2000);
