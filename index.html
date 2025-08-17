@@ -4,101 +4,100 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>VitalBoost</title>
-</head>
-<style>
-    body {
-        margin: 0;
-        font-family: Arial, sans-serif;
+    <title>VitalBoost - Discover The Morning Ritual</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background-image: url('Background.png');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+        }
 
-        /* --- Background Image Styles --- */
-        background-image: url('Background.png');
-        /* This uses your specified filename */
-        background-size: cover;
-        background-position: center;
-        background-repeat: no-repeat;
-        background-attachment: fixed;
-    }
-</style>
+        /* Style for the thank you message */
+        #thankYouMessage {
+            display: none;
+            /* Hidden by default */
+            color: #ffcc00;
+            margin-top: 15px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+
 <body>
 
-    <!-- Landing Box -->
     <div
-        style="max-width: 500px; margin: 80px auto; background:#222; padding:30px; border-radius:6px; text-align:center; color:white;">
+        style="max-width: 500px; margin: 80px auto; background:rgba(34, 34, 34, 0.9); padding:30px; border-radius:6px; text-align:center; color:white;">
 
-        <!-- Heading -->
         <h2 style="color:white; font-size:22px; line-height:1.5;">
-            "FACT: Below You'll Find The Secret To The<span style="color:red;"> New 'MITO-MELT' </span>Method..."
+            The 30-Second Morning Ritual That Flushes Out a Hidden ‘Metabolic Blocker’ From Your System
         </h2>
 
-        <!-- Subheading -->
-        <p style="color:#bbb; margin:20px 0 10px;">Enter Your Details to Get Started</p>
+        <p style="color:#bbb; margin:20px 0 10px;">Enter Your Email to Discover The Secret:</p>
 
-        <!-- Form -->
-        <form
-            action="https://adc1a2wft7ukyk69rmp73l5nfv.hop.clickbank.net/?&traffic_source=reddit&traffic_type=organic&campaign=fitness_thread"
-            method="GET">
-            <input type="email" name="email" placeholder="Enter Your Email Address.." required
+        <form id="lead-form">
+            <input type="email" id="email-input" name="email" placeholder="Enter Your Email Address.." required
                 style="width:90%; padding:12px; border:none; border-radius:4px; margin-bottom:15px; font-size:14px;">
 
-            <button type="submit"
+            <button type="submit" id="submit-button"
                 style="width:90%; padding:14px; background:#ffcc00; color:black; font-weight:bold; font-size:16px; border:none; border-radius:4px; cursor:pointer;">
-                LEARN MORE NOW!!
+                SHOW ME THE SECRET
             </button>
         </form>
 
-        <!-- Privacy Note -->
+        <div id="thankYouMessage">Thank you! Redirecting now...</div>
+
         <p style="font-size:12px; color:#aaa; margin-top:15px;">** You Will Never Get Spam - We Protect Your Privacy</p>
     </div>
 
-    <!-- Footer -->
     <footer style="text-align:center; margin-top:30px; color:white; font-size:14px;">
         <p>Copyright © 2025 - VitalBoost</p>
         <p><a href="/privacy.html" style="color:white; text-decoration:none;">Privacy Policy</a> -
             <a href="/disclaimer.html" style="color:white; text-decoration:none;">Disclaimer</a>
         </p>
     </footer>
-<script>
-    const form = document.getElementById('lead-form');
-    const submitButton = document.getElementById('submit-button');
-    const thankYouMessage = document.getElementById('thankYouMessage');
 
-    // !!! IMPORTANT !!! 
-    // PASTE YOUR GOOGLE APPS SCRIPT URL HERE
-    const scriptURL = 'https://script.google.com/macros/s/AKfycbzKlMxjW78iq65zW6kK79pjBdwK2vkr2QwOaUjTxYMcb46Ub3TR9_s-5ub0lnZcGgL2_Q/exec';
+    <script>
+        const form = document.getElementById('lead-form');
+        const submitButton = document.getElementById('submit-button');
+        const thankYouMessage = document.getElementById('thankYouMessage');
 
-    // This is your affiliate link
-    const affiliateURL = 'https://adc1a2wft7ukyk69rmp73l5nfv.hop.clickbank.net/?&traffic_source=reddit&traffic_type=organic&campaign=fitness_thread';
+        // !!! IMPORTANT !!! 
+        // PASTE YOUR GOOGLE APPS SCRIPT URL HERE
+        const scriptURL = 'https://script.google.com/macros/s/AKfycbzKlMxjW78iq65zW6kK79pjBdwK2vkr2QwOaUjTxYMcb46Ub3TR9_s-5ub0lnZcGgL2_Q/exec';
 
-    form.addEventListener('submit', e => {
-        e.preventDefault(); // This stops the form from submitting the old way
+        // This is your affiliate link
+        const affiliateURL = 'https://adc1a2wft7ukyk69rmp73l5nfv.hop.clickbank.net/?&traffic_source=reddit&traffic_type=organic&campaign=fitness_thread';
 
-        submitButton.disabled = true;
-        submitButton.innerText = 'SUBMITTING...';
+        form.addEventListener('submit', e => {
+            e.preventDefault(); // This stops the form from submitting the old way
 
-        fetch(scriptURL, { method: 'POST', body: new FormData(form) })
-            .then(response => {
-                console.log('Success!', response);
-                submitButton.innerText = 'SUCCESS!';
-                thankYouMessage.style.display = 'block';
+            submitButton.disabled = true;
+            submitButton.innerText = 'SUBMITTING...';
 
-                // Wait 2 seconds, then redirect to the affiliate link
-                setTimeout(() => {
-                    window.location.href = affiliateURL;
-                }, 2000);
-            })
-            .catch(error => {
-                console.error('Error!', error.message);
-                submitButton.disabled = false;
-                submitButton.innerText = 'SHOW ME THE SECRET';
-                alert('Error! Could not submit form. Please try again.');
-            });
-    });
-</script>
+            fetch(scriptURL, { method: 'POST', body: new FormData(form) })
+                .then(response => {
+                    console.log('Success!', response);
+                    submitButton.innerText = 'SUCCESS!';
+                    thankYouMessage.style.display = 'block';
 
-</body>
+                    // Wait 2 seconds, then redirect to the affiliate link
+                    setTimeout(() => {
+                        window.location.href = affiliateURL;
+                    }, 2000);
+                })
+                .catch(error => {
+                    console.error('Error!', error.message);
+                    submitButton.disabled = false;
+                    submitButton.innerText = 'SHOW ME THE SECRET';
+                    alert('Error! Could not submit form. Please try again.');
+                });
+        });
+    </script>
 
-</html>
 </body>
 
 </html>
