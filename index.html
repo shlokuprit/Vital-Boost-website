@@ -58,7 +58,47 @@
             <a href="/disclaimer.html" style="color:white; text-decoration:none;">Disclaimer</a>
         </p>
     </footer>
+<script>
+    const form = document.getElementById('lead-form');
+    const submitButton = document.getElementById('submit-button');
+    const thankYouMessage = document.getElementById('thankYouMessage');
 
+    // !!! IMPORTANT !!! 
+    // PASTE YOUR GOOGLE APPS SCRIPT URL HERE
+    const scriptURL = 'https://script.google.com/macros/s/AKfycbzKlMxjW78iq65zW6kK79pjBdwK2vkr2QwOaUjTxYMcb46Ub3TR9_s-5ub0lnZcGgL2_Q/exec';
+
+    // This is your affiliate link
+    const affiliateURL = 'https://adc1a2wft7ukyk69rmp73l5nfv.hop.clickbank.net/?&traffic_source=reddit&traffic_type=organic&campaign=fitness_thread';
+
+    form.addEventListener('submit', e => {
+        e.preventDefault(); // This stops the form from submitting the old way
+
+        submitButton.disabled = true;
+        submitButton.innerText = 'SUBMITTING...';
+
+        fetch(scriptURL, { method: 'POST', body: new FormData(form) })
+            .then(response => {
+                console.log('Success!', response);
+                submitButton.innerText = 'SUCCESS!';
+                thankYouMessage.style.display = 'block';
+
+                // Wait 2 seconds, then redirect to the affiliate link
+                setTimeout(() => {
+                    window.location.href = affiliateURL;
+                }, 2000);
+            })
+            .catch(error => {
+                console.error('Error!', error.message);
+                submitButton.disabled = false;
+                submitButton.innerText = 'SHOW ME THE SECRET';
+                alert('Error! Could not submit form. Please try again.');
+            });
+    });
+</script>
+
+</body>
+
+</html>
 </body>
 
 </html>
